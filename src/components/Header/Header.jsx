@@ -11,25 +11,25 @@ function Header() {
 
   return (
     <header className="header">
-      <div className="header__content-left">
+      <div className="header__info-container">
         <img src={logo} alt="wtwr logo" className="header__logo" />
-        <p className="header__date">{currentDate}, New York</p>
+        <p className="header__date-and-location">{currentDate}, New York</p>
       </div>
-      <div className="header__content-right">
+      <div className="header__user-container">
         <button className="header__button">+ Add clothes</button>
         <p className="header__user-name">Terrence Tegegne</p>
-      </div>
-      <div className="header__avatar-container">
-        <img
-          src={avatar}
-          alt="image of terrence tegegne"
-          className="header__avatar header__avatar_default"
-        />
-        <img
-          src={hoverAvatar}
-          alt="the letter T"
-          className="header__avatar header__avatar_hover"
-        />
+        <div className="header__avatar-container">
+          <img
+            src={avatar}
+            alt="image of terrence tegegne"
+            className="header__avatar header__avatar_default"
+          />
+          <img
+            src={hoverAvatar}
+            alt="the letter T"
+            className="header__avatar header__avatar_hover"
+          />
+        </div>
       </div>
     </header>
   );

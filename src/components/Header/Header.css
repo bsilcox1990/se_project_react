@@ -2,29 +2,23 @@
   display: flex;
   font-size: 20px;
   justify-content: space-between;
-  margin-bottom: 28px;
+  padding: 32px 0 28px;
   align-items: center;
 }
 
-.header__content-left {
+.header__info-container {
   display: flex;
   align-items: center;
   gap: 24px;
 }
 
-.header__content-right {
+.header__user-container {
   display: flex;
   align-items: center;
   gap: 20px;
-  margin: 0 88px 0 auto;
 }
 
-.header__logo {
-  width: 89px;
-  height: 40px;
-}
-
-.header__date {
+.header__date-and-location {
   margin: 0;
 }
 
@@ -39,7 +33,7 @@
 }
 
 .header__user-name {
-  margin: 0;
+  margin: 0 68px 0 0;
 }
 
 .header__avatar {

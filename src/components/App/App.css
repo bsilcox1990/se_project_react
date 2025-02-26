@@ -1,5 +1,4 @@
 .page {
-  padding: 32px 40px 24px;
   background-color: #f3f3f3;
   font-family: "Grotesk", sans-serif, Arial, Helvetica;
   font-weight: 700;
@@ -11,4 +10,5 @@
   max-width: 1360px;
   margin: 0 auto;
   min-height: 100vh;
+  padding: 0 40px;
 }
