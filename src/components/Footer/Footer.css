@@ -3,6 +3,7 @@
   display: flex;
   justify-content: space-between;
   padding-bottom: 24px;
+  padding-top: 85px;
 }
 
 .footer__author {

@@ -1,3 +1,18 @@
 .main__content {
   flex: 1 0 auto;
 }
+
+.cards__info {
+  margin: 0;
+  padding: 40px 0 34px;
+  font-size: 20px;
+}
+
+.cards__list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  gap: 20px;
+}
