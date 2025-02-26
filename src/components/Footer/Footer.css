@@ -1,0 +1,13 @@
+.footer {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer__author {
+  margin: 0;
+}
+
+.footer__year {
+  margin: 0;
+}
