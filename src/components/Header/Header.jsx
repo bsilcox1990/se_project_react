@@ -3,7 +3,7 @@ import logo from "../../assets/Logo.svg";
 import avatar from "../../assets/avatar-placeholder.svg";
 import hoverAvatar from "../../assets/hover-avatar-placeholder.svg";
 
-function Header({ handleAddModal }) {
+function Header({ handleAddModal, weatherData }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -13,7 +13,9 @@ function Header({ handleAddModal }) {
     <header className="header">
       <div className="header__info-container">
         <img src={logo} alt="wtwr logo" className="header__logo" />
-        <p className="header__date-and-location">{currentDate}, New York</p>
+        <p className="header__date-and-location">
+          {currentDate}, {weatherData.city}
+        </p>
       </div>
       <div className="header__user-container">
         <button

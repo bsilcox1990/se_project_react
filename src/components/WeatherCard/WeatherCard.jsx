@@ -1,10 +1,10 @@
 import "./Weathercard.css";
 import cloudy from "../../assets/cloudy.png";
 
-function WeatherCard() {
+function WeatherCard({ weatherData }) {
   return (
     <section className="weather-card">
-      <p className="weather-card__temp">75 &deg; F</p>
+      <p className="weather-card__temp">{weatherData.temp} &deg; F</p>
       <img
         src={cloudy}
         alt="weather bar for cloudy day"
