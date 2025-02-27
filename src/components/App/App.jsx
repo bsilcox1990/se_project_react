@@ -1,27 +1,45 @@
 import { useState } from "react";
+import { useEffect } from "react";
 
 import "./App.css";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import ItemModal from "../ItemModal/ItemModal";
 
 function App() {
   const [weatherData, setWeatherData] = useState({ type: "cold" });
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const [activeModal, setActiveModal] = useState("");
+  const [selectedCard, setSelectedCard] = useState({});
+  const handleAddModal = () => setActiveModal("add-garment");
+  const closeModal = () => setActiveModal("");
+  const handleCardClick = (card) => {
+    setActiveModal("preview");
+    setSelectedCard(card);
+  };
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === "Escape") closeModal();
+    };
+    if (activeModal) document.addEventListener("keydown", handleEsc);
+    return () => document.removeEventListener("keydown", handleEsc);
+  }, [activeModal]);
+  const handleOverlayClick = (e) => {
+    if (e.target === e.currentTarget) closeModal();
+  };
 
   return (
     <div className="page">
       <div className="page__content">
-        <Header onOpenModal={openModal} />
-        <Main weatherData={weatherData} />
+        <Header handleAddModal={handleAddModal} />
+        <Main weatherData={weatherData} handleCardClick={handleCardClick} />
         <Footer />
       </div>
       <ModalWithForm
-        isOpen={isModalOpen}
+        activeModal={activeModal}
         onClose={closeModal}
+        onOverlayClick={handleOverlayClick}
         title="New garment"
         buttonText="Add garment"
         name="add-garment"
@@ -67,6 +85,13 @@ function App() {
           </label>
         </fieldset>
       </ModalWithForm>
+      <ItemModal
+        activeModal={activeModal}
+        card={selectedCard}
+        onClose={closeModal}
+        name="preview"
+        onOverlayClick={handleOverlayClick}
+      />
     </div>
   );
 }

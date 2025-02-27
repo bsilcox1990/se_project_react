@@ -1,26 +1,20 @@
 import { useEffect } from "react";
 import "./ModalWithForm.css";
 
-function ModalWithForm({ children, buttonText, title, name, isOpen, onClose }) {
-  useEffect(() => {
-    const handleEsc = (e) => {
-      if (e.key === "Escape") onClose();
-    };
-    if (isOpen) document.addEventListener("keydown", handleEsc);
-    return () => document.removeEventListener("keydown", handleEsc);
-  }, [isOpen, onClose]);
-
-  if (!isOpen) return null;
-
-  const handleOverlayClick = (e) => {
-    if (e.target === e.currentTarget) onClose();
-  };
-
+function ModalWithForm({
+  children,
+  buttonText,
+  title,
+  name,
+  activeModal,
+  onClose,
+  onOverlayClick,
+}) {
   return (
     <div
-      className={`modal modal_type_${name}`}
+      className={`modal ${activeModal === `${name}` && "modal_opened"}`}
       id={name}
-      onClick={handleOverlayClick}
+      onClick={onOverlayClick}
     >
       <div className="modal__container">
         <button
