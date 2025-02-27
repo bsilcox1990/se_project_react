@@ -8,14 +8,20 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 function App() {
   const [weatherData, setWeatherData] = useState({ type: "cold" });
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <div className="page">
       <div className="page__content">
-        <Header />
+        <Header onOpenModal={openModal} />
         <Main weatherData={weatherData} />
         <Footer />
       </div>
       <ModalWithForm
+        isOpen={isModalOpen}
+        onClose={closeModal}
         title="New garment"
         buttonText="Add garment"
         name="add-garment"

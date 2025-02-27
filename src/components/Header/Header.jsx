@@ -3,7 +3,7 @@ import logo from "../../assets/Logo.svg";
 import avatar from "../../assets/avatar-placeholder.svg";
 import hoverAvatar from "../../assets/hover-avatar-placeholder.svg";
 
-function Header() {
+function Header({ onOpenModal }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -16,7 +16,9 @@ function Header() {
         <p className="header__date-and-location">{currentDate}, New York</p>
       </div>
       <div className="header__user-container">
-        <button className="header__button">+ Add clothes</button>
+        <button type="button" onClick={onOpenModal} className="header__button">
+          + Add clothes
+        </button>
         <p className="header__user-name">Terrence Tegegne</p>
         <div className="header__avatar-container">
           <img
