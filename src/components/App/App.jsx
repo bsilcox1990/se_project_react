@@ -11,7 +11,13 @@ import ItemModal from "../ItemModal/ItemModal";
 import { getWeatherData, filterWeatherData } from "../../utils/weatherApi";
 
 function App() {
-  const [weatherData, setWeatherData] = useState({});
+  const [weatherData, setWeatherData] = useState({
+    city: "",
+    condition: "",
+    isDay: true,
+    temp: { F: 57.11 },
+    type: "",
+  });
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const handleAddModal = () => setActiveModal("add-garment");
@@ -20,7 +26,9 @@ function App() {
     setActiveModal("preview");
     setSelectedCard(card);
   };
+
   console.log(weatherData);
+
   useEffect(() => {
     getWeatherData(coordinates, APIkey)
       .then((data) => {
@@ -60,8 +68,8 @@ function App() {
           <input
             type="text"
             required
-            minlength="2"
-            maxlength="40"
+            minLength="2"
+            maxLength="40"
             placeholder="Name"
             className="modal__input"
             id="name"
