@@ -3,7 +3,9 @@ import "./ItemModal.css";
 function ItemModal({ card, onClose, activeModal, name, onOverlayClick }) {
   return (
     <div
-      className={`modal ${activeModal === `${name}` && "modal_opened"}`}
+      className={`modal modal_type_${name} ${
+        activeModal === `${name}` && "modal_opened"
+      }`}
       id={name}
       onClick={onOverlayClick}
     >

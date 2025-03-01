@@ -27,3 +27,14 @@
   background: transparent url(../../assets/close-button-white.svg) center
     no-repeat;
 }
+
+@media screen and (max-width: 425px) {
+  .modal__close-button_type_preview {
+    background: transparent url(../../assets/close-button-black.svg) center
+      no-repeat;
+  }
+
+  .modal_type_preview {
+    padding: 16px;
+  }
+}

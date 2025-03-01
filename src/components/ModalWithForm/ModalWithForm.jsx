@@ -12,11 +12,13 @@ function ModalWithForm({
 }) {
   return (
     <div
-      className={`modal ${activeModal === `${name}` && "modal_opened"}`}
+      className={`modal modal_type_${name} ${
+        activeModal === `${name}` && "modal_opened"
+      }`}
       id={name}
       onClick={onOverlayClick}
     >
-      <div className="modal__container">
+      <div className={`modal__container`}>
         <button
           onClick={onClose}
           type="button"

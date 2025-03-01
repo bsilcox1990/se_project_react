@@ -16,3 +16,20 @@
   list-style-type: none;
   gap: 20px;
 }
+
+@media screen and (max-width: 768px) {
+  .cards__info {
+    padding: 32px 0 20px;
+  }
+
+  .cards__list {
+    gap: 15px 16px;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .cards__list {
+    justify-content: normal;
+  }
+}

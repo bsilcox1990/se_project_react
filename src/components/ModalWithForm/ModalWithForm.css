@@ -47,6 +47,16 @@
   border-bottom: solid 1px rgb(0, 0, 0);
 }
 
+.modal__input_error {
+  border-color: red;
+}
+
+.modal__error {
+  color: red;
+  font-size: 16px;
+  display: block;
+}
+
 .modal__input:focus {
   outline: none;
 }
@@ -127,6 +137,33 @@
   cursor: pointer;
 }
 
+.modal__submit-button_type_disabled {
+  background-color: rbga(0, 0, 0, 0.3);
+}
+
 .modal__submit-button:hover {
   background-color: rgba(0, 0, 0, 0.6);
+}
+
+@media screen and (max-width: 425px) {
+  .modal_type_add-garment {
+    align-items: flex-end;
+  }
+  .modal__container {
+    padding: 32px 16px;
+  }
+
+  .modal__radio-buttons {
+    margin: 0 0 30px;
+  }
+
+  .modal__submit-button {
+    width: 100%;
+    padding: 12px 0;
+  }
+
+  .modal__close-button {
+    background: transparent url(../../assets/close-button-black.svg) center
+      no-repeat;
+  }
 }
