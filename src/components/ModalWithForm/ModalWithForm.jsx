@@ -9,6 +9,7 @@ function ModalWithForm({
   activeModal,
   onClose,
   onOverlayClick,
+  isSubmitDisabled = true,
 }) {
   return (
     <div
@@ -27,7 +28,11 @@ function ModalWithForm({
         <h2 className="modal__title">{title}</h2>
         <form name={name} className="modal__form">
           {children}
-          <button type="submit" className="modal__submit-button">
+          <button
+            type="submit"
+            className="modal__submit-button"
+            disabled={isSubmitDisabled}
+          >
             {buttonText}
           </button>
         </form>

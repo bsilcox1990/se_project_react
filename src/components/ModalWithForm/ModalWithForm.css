@@ -135,14 +135,16 @@
   padding: 8px 16px;
   line-height: 20px;
   cursor: pointer;
+  transition: opacity 0.3s ease;
 }
 
-.modal__submit-button_type_disabled {
-  background-color: rbga(0, 0, 0, 0.3);
+.modal__submit-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 
-.modal__submit-button:hover {
-  background-color: rgba(0, 0, 0, 0.6);
+.modal__submit-button:not(:disabled):hover {
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 425px) {

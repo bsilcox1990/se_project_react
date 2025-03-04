@@ -23,7 +23,7 @@
   }
 
   .cards__list {
-    gap: 15px 16px;
+    gap: 16px 15px;
     justify-content: center;
   }
 }

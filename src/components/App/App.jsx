@@ -9,6 +9,7 @@ import Main from "../Main/Main";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 import { getWeatherData, filterWeatherData } from "../../utils/weatherApi";
+//import { defaultClothingItems } from "../../utils/constants";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -26,8 +27,11 @@ function App() {
     weatherType: "",
   });
   const [formErrors, setFormErrors] = useState({});
+  const [isFormValid, setIsFormValid] = useState(false);
+  //const [garments, setGarments] = useState(defaultClothingItems);
   const handleAddModal = () => setActiveModal("add-garment");
   const closeModal = () => setActiveModal("");
+
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
@@ -47,24 +51,32 @@ function App() {
         [name]: value,
       }));
     }
+    const updatedformData = {
+      ...formData,
+      [name]:
+        type === "radio"
+          ? formData.weatherType === value
+            ? ""
+            : value
+          : value,
+    };
+    setIsFormValid(validateForm(updatedformData));
     setFormErrors((prev) => ({ ...prev, [name]: "" }));
-    validateForm();
   };
 
-  const validateForm = () => {
+  const validateForm = (data = formData) => {
     const errors = {};
-    if (!formData.name.trim()) errors.name = "Name is required";
-    else if (formData.name.length < 2)
+    if (!data.name.trim()) errors.name = "Name is required";
+    else if (data.name.length < 2)
       errors.name = "Name must be at least 2 characters";
-    else if (formData.name.length > 40)
+    else if (data.name.length > 40)
       errors.name = "Name must be 40 characters or less";
 
-    if (!formData.imageUrl.trim()) errors.imageUrl = "Image URL is required";
-    else if (!isValidUrl(formData.imageUrl))
+    if (!data.imageUrl.trim()) errors.imageUrl = "Image URL is required";
+    else if (!isValidUrl(data.imageUrl))
       errors.imageUrl = "Please enter a valid URL";
 
-    if (!formData.weatherType)
-      errors.weatherType = "Please select a weather type";
+    if (!data.weatherType) errors.weatherType = "Please select a weather type";
 
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
@@ -79,6 +91,25 @@ function App() {
     }
   };
 
+  /* const handleAddGarmentSubmit = (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      const newGarment = {
+        name: formData.name,
+        imageUrl: formData.imageUrl,
+        weatherType: formData.weatherType,
+      };
+      console.log(newGarment);
+      debugger;
+      setGarments((prev) => [...prev, newGarment]);
+      debugger;
+      closeModal();
+      setFormData({ name: "", imageUrl: "", weatherType: "" });
+      setFormErrors({});
+      setIsFormValid(false);
+    }
+  }; */
+
   useEffect(() => {
     getWeatherData(coordinates, APIkey)
       .then((data) => {
@@ -87,6 +118,7 @@ function App() {
       })
       .catch((err) => console.error(err));
   }, []);
+
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === "Escape") closeModal();
@@ -112,6 +144,8 @@ function App() {
         title="New garment"
         buttonText="Add garment"
         name="add-garment"
+        isSubmitDisabled={!isFormValid}
+        //onSubmit={handleAddGarmentSubmit}
       >
         <label htmlFor="name" className="modal__label">
           Name
