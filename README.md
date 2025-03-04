@@ -35,7 +35,11 @@ Will add the ability to add new clothing items and the ability to update user na
 
 This website is deployed on GitHub pages.
 
--[Deployment Link][]
+-[Deployment Link][https://bsilcox1990.github.io/se_project_react/]
+
+## Video explination of website
+
+-[Google drive link](https://drive.google.com/file/d/1O4uf2jHUS5Wo3Wf5dxaCJfcxkPdOijQJ/view?usp=drive_link)
 
 ## Available plugins
 
