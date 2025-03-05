@@ -116,7 +116,7 @@ function App() {
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
       })
-      .catch((err) => console.error(err));
+      .catch(console.error);
   }, []);
 
   useEffect(() => {

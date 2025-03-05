@@ -14,7 +14,7 @@ function ItemModal({ card, onClose, activeModal, name, onOverlayClick }) {
           onClick={onClose}
           type="button"
           className={`modal__close-button modal__close-button_type_${name}`}
-        ></button>
+        />
         <img src={card.link} alt={card.name} className="modal__image" />
         <div className="modal__footer">
           <h2 className="modal__caption">{card.name}</h2>

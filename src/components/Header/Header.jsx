@@ -63,7 +63,7 @@ function Header({ handleAddModal, weatherData }) {
         className={`header__close-button ${
           isMobileMenuOpened ? `header__close-button_open` : ""
         }`}
-      ></button>
+      />
     </header>
   );
 }
