@@ -1,11 +1,18 @@
+import { useContext } from "react";
 import "./ToggleSwitch.css";
+import { CurrentTempUnitContext } from "../../contexts/CurrentTempUnitContext";
 
 function ToggleSwitch({ isOn, handleToggle }) {
+  const { handleToggleSwitchChange } = useContext(CurrentTempUnitContext);
+
   return (
     <>
       <input
         checked={isOn}
-        onChange={handleToggle}
+        onChange={() => {
+          handleToggle();
+          handleToggleSwitchChange();
+        }}
         id="toggle-switch"
         className="toggle-switch"
         type="checkbox"
