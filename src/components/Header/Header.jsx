@@ -4,6 +4,7 @@ import logo from "../../assets/Logo.svg";
 import avatar from "../../assets/avatar-placeholder.svg";
 import hoverAvatar from "../../assets/hover-avatar-placeholder.svg";
 import menuIcon from "../../assets/mobile-menu-button.png";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
 function Header({ handleAddModal, weatherData }) {
   const currentDate = new Date().toLocaleString("default", {
@@ -13,6 +14,7 @@ function Header({ handleAddModal, weatherData }) {
 
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
   const toggleMobileMenu = () => setIsMobileMenuOpened(!isMobileMenuOpened);
+  const [value, setValue] = useState(false);
 
   return (
     <header className="header">
@@ -27,6 +29,7 @@ function Header({ handleAddModal, weatherData }) {
           isMobileMenuOpened ? `header__user-container_open` : ""
         }`}
       >
+        <ToggleSwitch isOn={value} handleToggle={() => setValue(!value)} />
         <button
           type="button"
           onClick={handleAddModal}
