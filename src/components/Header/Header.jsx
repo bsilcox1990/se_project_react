@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Header.css";
 import logo from "../../assets/Logo.svg";
 import avatar from "../../assets/avatar-placeholder.svg";
@@ -19,7 +20,9 @@ function Header({ handleAddModal, weatherData }) {
   return (
     <header className="header">
       <div className="header__info-container">
-        <img src={logo} alt="wtwr logo" className="header__logo" />
+        <Link to="/">
+          <img src={logo} alt="wtwr logo" className="header__logo" />
+        </Link>
         <p className="header__date-and-location">
           {currentDate}, {weatherData.city}
         </p>
@@ -37,21 +40,23 @@ function Header({ handleAddModal, weatherData }) {
         >
           + Add clothes
         </button>
-        <div className="header__user-info">
-          <p className="header__user-name">Terrence Tegegne</p>
-          <div className="header__avatar-container">
-            <img
-              src={avatar}
-              alt="image of terrence tegegne"
-              className="header__avatar header__avatar_default"
-            />
-            <img
-              src={hoverAvatar}
-              alt="the letter T"
-              className="header__avatar header__avatar_hover"
-            />
+        <Link to="/profile">
+          <div className="header__user-info">
+            <p className="header__user-name">Terrence Tegegne</p>
+            <div className="header__avatar-container">
+              <img
+                src={avatar}
+                alt="image of terrence tegegne"
+                className="header__avatar header__avatar_default"
+              />
+              <img
+                src={hoverAvatar}
+                alt="the letter T"
+                className="header__avatar header__avatar_hover"
+              />
+            </div>
           </div>
-        </div>
+        </Link>
       </div>
       <button
         type="button"
