@@ -21,8 +21,7 @@ function WeatherCard({ weatherData }) {
   return (
     <section className="weather-card">
       <p className="weather-card__temp">
-        {Math.floor(weatherData.temp[currentTempUnit])} &deg;{" "}
-        {currentTempUnit === "F" ? "F" : "C"}
+        {Math.floor(weatherData.temp[currentTempUnit])} &deg; {currentTempUnit}
       </p>
       <img
         src={weatherOption?.url}

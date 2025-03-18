@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import "./ModalWithForm.css";
 
 function ModalWithForm({
@@ -10,6 +9,7 @@ function ModalWithForm({
   onClose,
   onOverlayClick,
   isSubmitDisabled = true,
+  onSubmit,
 }) {
   return (
     <div
@@ -26,7 +26,7 @@ function ModalWithForm({
           className="modal__close-button"
         />
         <h2 className="modal__title">{title}</h2>
-        <form name={name} className="modal__form">
+        <form onSubmit={onSubmit} name={name} className="modal__form">
           {children}
           <button
             type="submit"

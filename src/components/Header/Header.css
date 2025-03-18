@@ -36,6 +36,11 @@
 
 .header__user-name {
   margin: 0 68px 0 0;
+  color: #000;
+}
+
+.header a {
+  text-decoration: none;
 }
 
 .header__avatar {

@@ -66,6 +66,10 @@
   background: #000;
 }
 
+.toggle-switch__label:hover .toggle-switch__button {
+  width: 30px;
+}
+
 .toggle-switch:checked + .toggle-switch__label .toggle-switch__button {
   left: calc(100%);
   transform: translateX(-100%);
