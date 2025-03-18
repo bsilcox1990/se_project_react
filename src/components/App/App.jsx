@@ -13,6 +13,7 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import { getWeatherData, filterWeatherData } from "../../utils/weatherApi";
 import { CurrentTempUnitContext } from "../../contexts/CurrentTempUnitContext";
 import { defaultClothingItems } from "../../utils/constants";
+import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -38,9 +39,23 @@ function App() {
     currentTempUnit === "F" ? setCurrentTempUnit("C") : setCurrentTempUnit("F");
   };
 
+  const openConfirmationModal = (card) => {
+    setActiveModal("delete");
+    setSelectedCard(card);
+  };
+
   const handleAddGarmentSubmit = (newGarment) => {
     setGarments((prev) => [newGarment, ...prev]);
     closeModal();
+  };
+
+  const handleCardDelete = () => {
+    const filteredGarments = garments.filter((item) => {
+      return item !== selectedCard;
+    });
+    setGarments(filteredGarments);
+    closeModal();
+    setSelectedCard({});
   };
 
   useEffect(() => {
@@ -106,6 +121,14 @@ function App() {
           onClose={closeModal}
           name="preview"
           onOverlayClick={handleOverlayClick}
+          onDeleteClick={openConfirmationModal}
+        />
+        <DeleteConfirmationModal
+          name="delete"
+          activeModal={activeModal}
+          onClose={closeModal}
+          onOverlayClick={handleOverlayClick}
+          onCardDelete={handleCardDelete}
         />
       </CurrentTempUnitContext.Provider>
     </div>
