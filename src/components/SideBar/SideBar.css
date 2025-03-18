@@ -13,3 +13,20 @@
   font-size: 20px;
   font-weight: 700;
 }
+
+@media screen and (max-width: 375px) {
+  .sidebar {
+    align-items: normal;
+  }
+
+  .sidebar__user-name {
+    margin: 0 0 0 20px;
+    font-size: 24px;
+  }
+
+  .sidebar {
+    border-top: 1px solid rgb(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgb(0, 0, 0, 0.3);
+    padding: 20px 0;
+  }
+}

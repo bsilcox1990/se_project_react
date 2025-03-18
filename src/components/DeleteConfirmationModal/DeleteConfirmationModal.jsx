@@ -19,7 +19,7 @@ function DeleteConfirmationModal({
         <button
           onClick={onClose}
           type="button"
-          className="modal__close-button"
+          className={`modal__close-button modal__close-button_type_${name}`}
         ></button>
         <h2 className={`modal__title modal__title_type_${name}`}>
           Are you sure you want to delete this item? This action is

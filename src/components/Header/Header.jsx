@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "./Header.css";
 import logo from "../../assets/Logo.svg";
 import avatar from "../../assets/avatar-placeholder.svg";
@@ -13,13 +14,20 @@ function Header({ handleAddModal, weatherData }) {
     day: "numeric",
   });
 
+  const location = useLocation();
+  const isProfileRoute = location.pathname.startsWith("/profile");
+
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
   const toggleMobileMenu = () => setIsMobileMenuOpened(!isMobileMenuOpened);
   const [value, setValue] = useState(false);
 
   return (
-    <header className="header">
-      <div className="header__info-container">
+    <header className={`header ${isProfileRoute ? "header_type_profile" : ""}`}>
+      <div
+        className={`header__info-container ${
+          isProfileRoute ? "header__info-container_type_profile" : ""
+        }`}
+      >
         <Link to="/">
           <img src={logo} alt="wtwr logo" className="header__logo" />
         </Link>
