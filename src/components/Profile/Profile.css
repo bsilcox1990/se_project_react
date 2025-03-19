@@ -30,12 +30,24 @@
   gap: 16px;
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 768px) {
+  .profile__heading {
+    justify-content: space-evenly;
+  }
+}
+
+@media screen and (max-width: 540px) {
   .profile {
     flex-direction: column;
     padding-top: 0;
   }
 
+  .profile__heading {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 430px) {
   .profile__heading {
     justify-content: space-between;
   }

@@ -215,6 +215,7 @@
   text-align: center;
   font-weight: 700;
   max-width: 367px;
+  margin: 0;
 }
 
 .modal__confirm-button {
@@ -222,15 +223,30 @@
   background: transparent;
   border: none;
   cursor: pointer;
+  font-size: 20px;
+  line-height: 24px;
+  padding: 0;
 }
 
 .modal__cancel-button {
   background: transparent;
   border: none;
   cursor: pointer;
+  font-size: 20px;
+  line-height: 24px;
+  padding: 0;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 540px) {
+  .modal__container_type_delete {
+    padding: 36px 28px 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 430px) {
   .modal__close-button_type_preview {
     background: transparent url(../../assets/close-button-black.svg) center
       no-repeat;
@@ -266,12 +282,14 @@
       no-repeat;
   }
 
-  .modal__title_type_delete {
-    font-size: 16px;
-  }
-
   .modal__close-button_type_delete {
     top: -26px;
     right: 5px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .modal__title_type_delete {
+    font-size: 17px;
   }
 }
