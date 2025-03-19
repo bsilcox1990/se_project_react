@@ -74,7 +74,7 @@ function AddItemModal({
     if (validateForm()) {
       const newGarment = {
         name: formData.name,
-        link: formData.imageUrl,
+        imageUrl: formData.imageUrl,
         weather: formData.weatherType,
       };
       onAddGarmentSubmit(newGarment);

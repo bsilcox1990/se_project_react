@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import { coordinates, APIkey } from "../../utils/constants";
+import { getItems, addItems, deleteItem } from "../../utils/api";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
@@ -12,7 +13,6 @@ import Profile from "../Profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import { getWeatherData, filterWeatherData } from "../../utils/weatherApi";
 import { CurrentTempUnitContext } from "../../contexts/CurrentTempUnitContext";
-import { defaultClothingItems } from "../../utils/constants";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTempUnit, setCurrentTempUnit] = useState("F");
-  const [garments, setGarments] = useState(defaultClothingItems);
+  const [garments, setGarments] = useState([]);
   const handleAddModal = () => setActiveModal("add-garment");
   const closeModal = () => setActiveModal("");
 
@@ -39,23 +39,30 @@ function App() {
     currentTempUnit === "F" ? setCurrentTempUnit("C") : setCurrentTempUnit("F");
   };
 
-  const openConfirmationModal = (card) => {
+  const openConfirmationModal = () => {
     setActiveModal("delete");
-    setSelectedCard(card);
   };
 
   const handleAddGarmentSubmit = (newGarment) => {
-    setGarments((prev) => [newGarment, ...prev]);
-    closeModal();
+    addItems(newGarment)
+      .then((data) => {
+        setGarments((prev) => [data, ...prev]);
+        closeModal();
+      })
+      .catch(console.error);
   };
 
   const handleCardDelete = () => {
     const filteredGarments = garments.filter((item) => {
       return item !== selectedCard;
     });
-    setGarments(filteredGarments);
-    closeModal();
-    setSelectedCard({});
+    deleteItem(selectedCard._id)
+      .then(() => {
+        setGarments(filteredGarments);
+        closeModal();
+        setSelectedCard({});
+      })
+      .catch(console.error);
   };
 
   useEffect(() => {
@@ -63,6 +70,14 @@ function App() {
       .then((data) => {
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
+      })
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    getItems()
+      .then((data) => {
+        setGarments(data);
       })
       .catch(console.error);
   }, []);
