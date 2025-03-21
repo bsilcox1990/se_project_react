@@ -27,6 +27,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTempUnit, setCurrentTempUnit] = useState("F");
   const [garments, setGarments] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const handleAddModal = () => setActiveModal("add-garment");
   const closeModal = () => setActiveModal("");
 
@@ -44,25 +45,32 @@ function App() {
   };
 
   const handleAddGarmentSubmit = (newGarment) => {
-    addItems(newGarment)
+    setIsLoading(true);
+    return addItems(newGarment)
       .then((data) => {
         setGarments((prev) => [data, ...prev]);
         closeModal();
       })
-      .catch(console.error);
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const handleCardDelete = () => {
     const filteredGarments = garments.filter((item) => {
       return item !== selectedCard;
     });
+    setIsLoading(true);
     deleteItem(selectedCard._id)
       .then(() => {
         setGarments(filteredGarments);
         closeModal();
         setSelectedCard({});
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -81,17 +89,6 @@ function App() {
       })
       .catch(console.error);
   }, []);
-
-  useEffect(() => {
-    const handleEsc = (e) => {
-      if (e.key === "Escape") closeModal();
-    };
-    if (activeModal) document.addEventListener("keydown", handleEsc);
-    return () => document.removeEventListener("keydown", handleEsc);
-  }, [activeModal]);
-  const handleOverlayClick = (e) => {
-    if (e.target === e.currentTarget) closeModal();
-  };
 
   return (
     <div className="page">
@@ -126,8 +123,8 @@ function App() {
         </div>
         <AddItemModal
           activeModal={activeModal}
+          isSubmitting={isLoading}
           onClose={closeModal}
-          onOverlayClick={handleOverlayClick}
           onAddGarmentSubmit={handleAddGarmentSubmit}
         />
         <ItemModal
@@ -135,14 +132,13 @@ function App() {
           card={selectedCard}
           onClose={closeModal}
           name="preview"
-          onOverlayClick={handleOverlayClick}
           onDeleteClick={openConfirmationModal}
         />
         <DeleteConfirmationModal
           name="delete"
           activeModal={activeModal}
           onClose={closeModal}
-          onOverlayClick={handleOverlayClick}
+          buttonText={isLoading ? "Deleting..." : "Yes, delete item"}
           onCardDelete={handleCardDelete}
         />
       </CurrentTempUnitContext.Provider>

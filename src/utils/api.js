@@ -5,7 +5,7 @@ function sendRequest({ url, options }) {
   return fetch(url, options).then(checkResponse);
 }
 
-const checkResponse = (res) => {
+export const checkResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 };
 

@@ -6,12 +6,40 @@
 .sidebar__avatar {
   width: 56px;
   height: 56px;
+  transition: opacity 0.3s ease;
 }
 
 .sidebar__user-name {
   margin: 0 116px 0 16px;
   font-size: 20px;
   font-weight: 700;
+}
+
+.sidebar__avatar-container {
+  position: relative;
+  width: 56px;
+  height: 56px;
+}
+
+.sidebar__avatar-container:hover .sidebar__avatar_default {
+  opacity: 0;
+}
+
+.sidebar__avatar-container:hover .sidebar__avatar_hover {
+  opacity: 1;
+}
+
+.sidebar__avatar_default {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.sidebar__avatar_hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
 }
 
 @media screen and (max-width: 540px) {

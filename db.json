@@ -101,6 +101,108 @@
       "name": "T-Shirt",
       "weather": "hot",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png?etag=44ed1963c44ab19cd2f5011522c5fc09"
+    },
+    {
+      "name": "asdf",
+      "imageUrl": "https://tse2.mm.bing.net/th?id=OIP.iHQkYz3OvzF-aOu8f7kOCQHaJQ&pid=Api&P=0&h=220",
+      "weather": "warm",
+      "_id": 17
+    },
+    {
+      "name": "asdf",
+      "imageUrl": "https://tse2.mm.bing.net/th?id=OIP.iHQkYz3OvzF-aOu8f7kOCQHaJQ&pid=Api&P=0&h=220",
+      "weather": "warm",
+      "_id": 18
+    },
+    {
+      "name": "asdf",
+      "imageUrl": "https://tse2.mm.bing.net/th?id=OIP.c5k_snM1wDV3wP8UNgk2bAHaEo&pid=Api&P=0&h=220",
+      "weather": "cold",
+      "_id": 19
+    },
+    {
+      "name": "fdsa",
+      "imageUrl": "https://tse2.mm.bing.net/th?id=OIP.COuzPQg0LVFmRcJWhnuuHAHaDI&pid=Api&P=0&h=220",
+      "weather": "hot",
+      "_id": 20
+    },
+    {
+      "name": "asd",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png?etag=f3dad389b22909cafa73cff9f9a3d591",
+      "weather": "hot",
+      "_id": 21
+    },
+    {
+      "name": "asdf",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png?etag=f3dad389b22909cafa73cff9f9a3d591",
+      "weather": "cold",
+      "_id": 22
+    },
+    {
+      "name": "asdf",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png?etag=f3dad389b22909cafa73cff9f9a3d591",
+      "weather": "cold",
+      "_id": 23
+    },
+    {
+      "name": "asdfasdfadsf",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png?etag=f3dad389b22909cafa73cff9f9a3d591",
+      "weather": "hot",
+      "_id": 24
+    },
+    {
+      "name": "asdf",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png?etag=f3dad389b22909cafa73cff9f9a3d591",
+      "weather": "warm",
+      "_id": 25
+    },
+    {
+      "name": "asdf",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png?etag=f3dad389b22909cafa73cff9f9a3d591",
+      "weather": "hot",
+      "_id": 26
+    },
+    {
+      "name": "asdf",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png?etag=f3dad389b22909cafa73cff9f9a3d591",
+      "weather": "warm",
+      "_id": 27
+    },
+    {
+      "name": "sdfsdfs",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png?etag=f3dad389b22909cafa73cff9f9a3d591",
+      "weather": "warm",
+      "_id": 28
+    },
+    {
+      "name": "asdf",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png?etag=f3dad389b22909cafa73cff9f9a3d591",
+      "weather": "cold",
+      "_id": 29
+    },
+    {
+      "name": "asdf",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png?etag=f3dad389b22909cafa73cff9f9a3d591",
+      "weather": "cold",
+      "_id": 30
+    },
+    {
+      "name": "asdf",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png?etag=f3dad389b22909cafa73cff9f9a3d591",
+      "weather": "hot",
+      "_id": 31
+    },
+    {
+      "name": "asdf",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png?etag=f3dad389b22909cafa73cff9f9a3d591",
+      "weather": "cold",
+      "_id": 32
+    },
+    {
+      "name": "asdf",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png?etag=f3dad389b22909cafa73cff9f9a3d591",
+      "weather": "warm",
+      "_id": 33
     }
   ]
 }
