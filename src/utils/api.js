@@ -1,7 +1,7 @@
-const baseUrl = "http://localhost:3001";
+export const baseUrl = "http://localhost:3001";
 const headers = { "Content-Type": "application/json" };
 
-function sendRequest({ url, options }) {
+export function sendRequest({ url, options }) {
   return fetch(url, options).then(checkResponse);
 }
 

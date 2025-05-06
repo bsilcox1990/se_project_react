@@ -30,6 +30,7 @@ function App() {
   const [currentTempUnit, setCurrentTempUnit] = useState("F");
   const [garments, setGarments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handleAddModal = () => setActiveModal("add-garment");
   const closeModal = () => setActiveModal("");
 
