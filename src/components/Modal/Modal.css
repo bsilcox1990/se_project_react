@@ -249,6 +249,10 @@
   padding: 0;
 }
 
+/* Register Modal */
+
+/* Login Modal */
+
 @media screen and (max-width: 540px) {
   .modal__container_type_delete {
     padding: 36px 28px 36px;

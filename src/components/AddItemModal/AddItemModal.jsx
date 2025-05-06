@@ -52,7 +52,7 @@ function AddItemModal({
           maxLength="40"
           placeholder="Name"
           className={`modal__input ${errors.name ? "modal__input_error" : ""}`}
-          id="name"
+          id="add-name"
           name="name"
           value={values.name || ""}
           onChange={handleChange}
@@ -68,7 +68,7 @@ function AddItemModal({
           className={`modal__input ${
             errors.imageUrl ? "modal__input_error" : ""
           }`}
-          id="imageUrl"
+          id="add-imageUrl"
           name="imageUrl"
           value={values.imageUrl || ""}
           onChange={handleChange}

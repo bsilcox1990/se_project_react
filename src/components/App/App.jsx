@@ -11,6 +11,8 @@ import Main from "../Main/Main";
 import ItemModal from "../ItemModal/ItemModal";
 import Profile from "../Profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
+import RegisterModal from "../RegisterModal/RegisterModal";
+import LoginModal from "../LoginModal/LoginModal";
 import { getWeatherData, filterWeatherData } from "../../utils/weatherApi";
 import { CurrentTempUnitContext } from "../../contexts/CurrentTempUnitContext";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
@@ -56,6 +58,9 @@ function App() {
       });
   };
 
+  const handleRegisterUser = () => {};
+  const handleLogin = () => {};
+
   const handleCardDelete = () => {
     const filteredGarments = garments.filter((item) => {
       return item !== selectedCard;
@@ -84,7 +89,7 @@ function App() {
 
   useEffect(() => {
     getItems()
-      .then((data) => {
+      .then(({ data }) => {
         setGarments(data);
       })
       .catch(console.error);
@@ -126,6 +131,18 @@ function App() {
           isSubmitting={isLoading}
           onClose={closeModal}
           onAddGarmentSubmit={handleAddGarmentSubmit}
+        />
+        <RegisterModal
+          activeModal={activeModal}
+          isSubmitting={isLoading}
+          onClose={closeModal}
+          onRegister={handleRegisterUser}
+        />
+        <LoginModal
+          activeModal={activeModal}
+          isSubmitting={isLoading}
+          onClose={closeModal}
+          onLogin={handleLogin}
         />
         <ItemModal
           activeModal={activeModal}
