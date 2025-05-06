@@ -7,6 +7,22 @@ function LoginModal({ activeModal, onClose, isSubmitting, onLogin }) {
   const { values, errors, isValid, handleChange, resetForm } =
     useFormAndValidation();
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isValid) {
+      const user = { email: values.email, password: values.password };
+      setSubmitError(null);
+      onLogin(user)
+        .then(() => {
+          resetForm({ email: "", password: "" }, {}, false);
+        })
+        .catch((err) => {
+          setSubmitError("Failed to login. Please try again.");
+          console.error(err);
+        });
+    }
+  };
+
   return (
     <ModalWithForm
       activeModal={activeModal}
@@ -15,6 +31,7 @@ function LoginModal({ activeModal, onClose, isSubmitting, onLogin }) {
       title={"Log in"}
       buttonText={isSubmitting ? "Logging in..." : "Log in"}
       isSubmitDisabled={!isValid}
+      onSubmit={handleSubmit}
     >
       <label htmlFor="email" className="modal__label">
         Email

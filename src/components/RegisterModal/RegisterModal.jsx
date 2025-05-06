@@ -6,6 +6,31 @@ function RegisterModal({ activeModal, isSubmitting, onClose, onRegister }) {
   const [submitError, setSubmitError] = useState(null);
   const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isValid) {
+      const newUser = {
+        email: values.email,
+        password: values.password,
+        name: values.name,
+        avatar: values.avatar,
+      };
+      setSubmitError(null);
+      onRegister(newUser)
+        .then(() => {
+          resetForm(
+            { email: "", password: "", name: "", avatar: "" },
+            {},
+            false
+          );
+        })
+        .catch((err) => {
+          setSubmitError("Failed to register user.  Please try again.");
+          console.error(err);
+        });
+    }
+  };
   return (
     <ModalWithForm
       activeModal={activeModal}
@@ -14,6 +39,7 @@ function RegisterModal({ activeModal, isSubmitting, onClose, onRegister }) {
       onClose={onClose}
       buttonText={isSubmitting ? "Registering..." : "Sign up"}
       isSubmitDisabled={!isValid}
+      onSubmit={handleSubmit}
     >
       <label htmlFor="email" className="modal__label">
         Email*

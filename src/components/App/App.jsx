@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 import "./App.css";
 import { coordinates, APIkey } from "../../utils/constants";
@@ -15,6 +15,8 @@ import LoginModal from "../LoginModal/LoginModal";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { getWeatherData, filterWeatherData } from "../../utils/weatherApi";
 import { CurrentTempUnitContext } from "../../contexts/CurrentTempUnitContext";
+import { signUp, signIn, getUserInfo } from "../../utils/auth";
+import { setToken, getToken } from "../../utils/token";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 
 function App() {
@@ -29,8 +31,10 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTempUnit, setCurrentTempUnit] = useState("F");
   const [garments, setGarments] = useState([]);
+  const [userData, setUserData] = useState({ name: "", avatar: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
   const handleAddModal = () => setActiveModal("add-garment");
   const closeModal = () => setActiveModal("");
 
@@ -59,8 +63,62 @@ function App() {
       });
   };
 
-  const handleRegisterUser = () => {};
-  const handleLogin = () => {};
+  const handleRegisterUser = (newUser) => {
+    setIsLoading(true);
+    return signUp(newUser)
+      .then(() => {
+        return signIn(newUser.email, newUser.password);
+      })
+      .then((data) => {
+        if (data.token) {
+          setToken(data.token);
+          setUserData({ name: newUser.name, avatar: newUser.avatar });
+          setIsLoggedIn(true);
+          closeModal();
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const handleLogin = (user) => {
+    setIsLoading(true);
+    if (!user.email || !user.password) {
+      return;
+    }
+    return signIn(user.email, user.password)
+      .then((data) => {
+        if (data.token) {
+          setToken(data.token);
+          setIsLoggedIn(true);
+          return getUserInfo(data.token);
+        }
+      })
+      .then((user) => {
+        setUserData({ name: user.data.name, avatar: user.data.avatar });
+        closeModal();
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    const jwt = getToken();
+
+    if (!jwt) {
+      return;
+    }
+    getUserInfo(jwt)
+      .then((user) => {
+        setIsLoggedIn(true);
+        setUserData({ name: user.data.name, avatar: user.data.avatar });
+      })
+      .catch((err) => {
+        console.error("Error fetching user:", err);
+      });
+  }, []);
 
   const handleCardDelete = () => {
     const filteredGarments = garments.filter((item) => {

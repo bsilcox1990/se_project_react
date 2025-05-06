@@ -5,13 +5,13 @@ const headers = {
   "Content-Type": "application/json",
 };
 
-export const signUp = (name, avatar, email, password) => {
+export const signUp = (userData) => {
   return sendRequest({
     url: `${baseUrl}/signup`,
     options: {
       method: "POST",
       headers: headers,
-      body: JSON.stringify({ name, avatar, email, password }),
+      body: JSON.stringify(userData),
     },
   });
 };
@@ -23,6 +23,18 @@ export const signIn = (email, password) => {
       method: "POST",
       headers: headers,
       body: JSON.stringify({ email, password }),
+    },
+  });
+};
+
+export const getUserInfo = (token) => {
+  return sendRequest({
+    url: `${baseUrl}/users/me`,
+    options: {
+      headers: {
+        ...headers,
+        authorization: `Bearer ${token}`,
+      },
     },
   });
 };

@@ -13,20 +13,23 @@ export function getItems() {
   return sendRequest({ url: `${baseUrl}/items`, options: headers });
 }
 
-export function addItems(item) {
+export function addItems(item, token) {
   return sendRequest({
     url: `${baseUrl}/items`,
     options: {
       method: "POST",
-      headers: headers,
+      headers: { ...headers, authorization: `Bearer ${token}` },
       body: JSON.stringify(item),
     },
   });
 }
 
-export function deleteItem(id) {
+export function deleteItem(id, token) {
   return sendRequest({
     url: `${baseUrl}/items/${id}`,
-    options: { method: "DELETE", headers: headers },
+    options: {
+      method: "DELETE",
+      headers: { ...headers, authorization: `Bearer ${token}` },
+    },
   });
 }
