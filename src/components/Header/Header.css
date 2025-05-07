@@ -48,6 +48,7 @@
   height: 100%;
   transition: opacity 0.3s ease;
   cursor: pointer;
+  border-radius: 50%;
 }
 
 .header__user-info {
@@ -101,6 +102,23 @@
 .header__menu-icon {
   width: 44px;
   height: 44px;
+}
+
+.header__button-container {
+  display: flex;
+  gap: 20px;
+}
+
+.header__register-button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.header__login-button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
 }
 
 @media screen and (max-width: 853px) {

@@ -15,6 +15,7 @@ import LoginModal from "../LoginModal/LoginModal";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { getWeatherData, filterWeatherData } from "../../utils/weatherApi";
 import { CurrentTempUnitContext } from "../../contexts/CurrentTempUnitContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { signUp, signIn, getUserInfo } from "../../utils/auth";
 import { setToken, getToken } from "../../utils/token";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
@@ -34,9 +35,15 @@ function App() {
   const [userData, setUserData] = useState({ name: "", avatar: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({ userData, isLoggedIn });
   const navigate = useNavigate();
   const handleAddModal = () => setActiveModal("add-garment");
+  const handleRegisterModal = () => setActiveModal("register-user");
+  const handleLoginModal = () => setActiveModal("login-user");
   const closeModal = () => setActiveModal("");
+
+  console.log("value of logged in", isLoggedIn);
+  console.log("Current user in app", currentUser);
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
@@ -53,7 +60,8 @@ function App() {
 
   const handleAddGarmentSubmit = (newGarment) => {
     setIsLoading(true);
-    return addItems(newGarment)
+    const jwt = getToken();
+    return addItems(newGarment, jwt)
       .then((data) => {
         setGarments((prev) => [data, ...prev]);
         closeModal();
@@ -72,10 +80,14 @@ function App() {
       .then((data) => {
         if (data.token) {
           setToken(data.token);
-          setUserData({ name: newUser.name, avatar: newUser.avatar });
           setIsLoggedIn(true);
-          closeModal();
+          return getUserInfo(data.token);
         }
+      })
+      .then((user) => {
+        setUserData({ name: user.name, avatar: user.avatar });
+        setCurrentUser({ user, isLoggedIn: true });
+        closeModal();
       })
       .finally(() => {
         setIsLoading(false);
@@ -97,6 +109,7 @@ function App() {
       })
       .then((user) => {
         setUserData({ name: user.data.name, avatar: user.data.avatar });
+        setCurrentUser({ user, isLoggedIn: true });
         closeModal();
       })
       .finally(() => {
@@ -114,6 +127,7 @@ function App() {
       .then((user) => {
         setIsLoggedIn(true);
         setUserData({ name: user.data.name, avatar: user.data.avatar });
+        setCurrentUser({ user, isLoggedIn: true });
       })
       .catch((err) => {
         console.error("Error fetching user:", err);
@@ -124,8 +138,9 @@ function App() {
     const filteredGarments = garments.filter((item) => {
       return item !== selectedCard;
     });
+    const jwt = getToken();
     setIsLoading(true);
-    deleteItem(selectedCard._id)
+    deleteItem(selectedCard._id, jwt)
       .then(() => {
         setGarments(filteredGarments);
         closeModal();
@@ -155,72 +170,79 @@ function App() {
   }, []);
 
   return (
-    <div className="page">
-      <CurrentTempUnitContext.Provider
-        value={{ currentTempUnit, handleToggleSwitchChange }}
-      >
-        <div className="page__content">
-          <Header weatherData={weatherData} handleAddModal={handleAddModal} />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Main
-                  weatherData={weatherData}
-                  onCardClick={handleCardClick}
-                  garments={garments}
-                />
-              }
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
+        <CurrentTempUnitContext.Provider
+          value={{ currentTempUnit, handleToggleSwitchChange }}
+        >
+          <div className="page__content">
+            <Header
+              weatherData={weatherData}
+              handleAddModal={handleAddModal}
+              handleRegisterModal={handleRegisterModal}
+              handleLoginModal={handleLoginModal}
             />
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <Profile
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Main
+                    weatherData={weatherData}
                     onCardClick={handleCardClick}
-                    handleAddModal={handleAddModal}
                     garments={garments}
                   />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-          <Footer />
-        </div>
-        <AddItemModal
-          activeModal={activeModal}
-          isSubmitting={isLoading}
-          onClose={closeModal}
-          onAddGarmentSubmit={handleAddGarmentSubmit}
-        />
-        <RegisterModal
-          activeModal={activeModal}
-          isSubmitting={isLoading}
-          onClose={closeModal}
-          onRegister={handleRegisterUser}
-        />
-        <LoginModal
-          activeModal={activeModal}
-          isSubmitting={isLoading}
-          onClose={closeModal}
-          onLogin={handleLogin}
-        />
-        <ItemModal
-          activeModal={activeModal}
-          card={selectedCard}
-          onClose={closeModal}
-          name="preview"
-          onDeleteClick={openConfirmationModal}
-        />
-        <DeleteConfirmationModal
-          name="delete"
-          activeModal={activeModal}
-          onClose={closeModal}
-          buttonText={isLoading ? "Deleting..." : "Yes, delete item"}
-          onCardDelete={handleCardDelete}
-        />
-      </CurrentTempUnitContext.Provider>
-    </div>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <Profile
+                      onCardClick={handleCardClick}
+                      handleAddModal={handleAddModal}
+                      garments={garments}
+                    />
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+            <Footer />
+          </div>
+          <AddItemModal
+            activeModal={activeModal}
+            isSubmitting={isLoading}
+            onClose={closeModal}
+            onAddGarmentSubmit={handleAddGarmentSubmit}
+          />
+          <RegisterModal
+            activeModal={activeModal}
+            isSubmitting={isLoading}
+            onClose={closeModal}
+            onRegister={handleRegisterUser}
+          />
+          <LoginModal
+            activeModal={activeModal}
+            isSubmitting={isLoading}
+            onClose={closeModal}
+            onLogin={handleLogin}
+          />
+          <ItemModal
+            activeModal={activeModal}
+            card={selectedCard}
+            onClose={closeModal}
+            name="preview"
+            onDeleteClick={openConfirmationModal}
+          />
+          <DeleteConfirmationModal
+            name="delete"
+            activeModal={activeModal}
+            onClose={closeModal}
+            buttonText={isLoading ? "Deleting..." : "Yes, delete item"}
+            onCardDelete={handleCardDelete}
+          />
+        </CurrentTempUnitContext.Provider>
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 
