@@ -1,7 +1,12 @@
+import { useContext } from "react";
 import "./ItemModal.css";
 import Modal from "../Modal/Modal";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function ItemModal({ card, onClose, activeModal, name, onDeleteClick }) {
+  const currentUser = useContext(CurrentUserContext);
+  const isOwn = card.owner === currentUser.user?.data._id;
+
   return (
     <Modal
       name={name}
@@ -14,13 +19,16 @@ function ItemModal({ card, onClose, activeModal, name, onDeleteClick }) {
       <div className="modal__footer">
         <h2 className="modal__caption">{card.name}</h2>
         <p className="modal__weather">Weather: {card.weather}</p>
-        <button
-          onClick={onDeleteClick}
-          type="button"
-          className="modal__delete-button"
-        >
-          Delete item
-        </button>
+
+        {isOwn && (
+          <button
+            onClick={onDeleteClick}
+            type="button"
+            className="modal__delete-button"
+          >
+            Delete item
+          </button>
+        )}
       </div>
     </Modal>
   );

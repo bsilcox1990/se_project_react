@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import { coordinates, APIkey } from "../../utils/constants";
@@ -36,7 +36,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({ userData, isLoggedIn });
-  const navigate = useNavigate();
+
   const handleAddModal = () => setActiveModal("add-garment");
   const handleRegisterModal = () => setActiveModal("register-user");
   const handleLoginModal = () => setActiveModal("login-user");
@@ -44,6 +44,7 @@ function App() {
 
   console.log("value of logged in", isLoggedIn);
   console.log("Current user in app", currentUser);
+  console.log("value of garments", garments);
 
   const handleCardClick = (card) => {
     setActiveModal("preview");

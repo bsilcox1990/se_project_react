@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import "./Header.css";
 import logo from "../../assets/Logo.svg";
-import avatar from "../../assets/avatar-placeholder.svg";
+//import avatar from "../../assets/avatar-placeholder.svg";
 import hoverAvatar from "../../assets/hover-avatar-placeholder.svg";
 import menuIcon from "../../assets/mobile-menu-button.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";

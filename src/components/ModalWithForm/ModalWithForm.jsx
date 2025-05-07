@@ -1,4 +1,3 @@
-import useModalClose from "../../hooks/useModalClose";
 import "./ModalWithForm.css";
 import Modal from "../Modal/Modal";
 
