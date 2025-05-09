@@ -150,31 +150,25 @@ function App() {
       });
   };
 
-  const handleItemLike = (card) => {
+  const handleItemLike = (card, isLiked) => {
     const jwt = getToken();
-    !card.isLiked
+
+    !isLiked
       ? addItemLike(card._id, jwt)
           .then((updatedCard) => {
-            console.log(
-              "updated card returned from add item api call",
-              updatedCard
-            );
             setGarments((items) => {
-              console.log("list of items inside of garments", items);
-              items.map((item) => {
-                console.log(
-                  "each item being called on the garments array with map",
-                  item
-                );
-                return item._id === card._id ? updatedCard : item;
-              });
+              return items.map((item) =>
+                item._id === card._id ? updatedCard.data : item
+              );
             });
           })
           .catch(console.error)
-      : deleteItemLike(id, jwt)
+      : deleteItemLike(card._id, jwt)
           .then((updatedCard) => {
             setGarments((items) => {
-              items.map((item) => (item._id === id ? updatedCard : item));
+              return items.map((item) =>
+                item._id === card._id ? updatedCard.data : item
+              );
             });
           })
           .catch(console.error);
@@ -273,6 +267,7 @@ function App() {
                       garments={garments}
                       handleEditModal={handleEditModal}
                       handleLogout={handleLogout}
+                      onItemLike={handleItemLike}
                     />
                   </ProtectedRoute>
                 }

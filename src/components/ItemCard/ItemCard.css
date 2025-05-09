@@ -14,17 +14,36 @@
   box-sizing: border-box;
 }
 
-.card__title {
-  margin: 0;
+.card__title-container {
   position: absolute;
   top: 15px;
   left: 50%;
   font-size: 16px;
   transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+}
+
+.card__title {
+  margin: 0;
+  /*   position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%); */
+  font-size: 16px;
   color: rgba(0, 0, 0, 0.6);
   background-color: rgba(255, 255, 255, 0.8);
   padding: 2px 12px;
   border-radius: 4px;
+}
+
+.card__like-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cards__info {

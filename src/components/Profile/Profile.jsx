@@ -8,6 +8,7 @@ function Profile({
   garments,
   handleEditModal,
   handleLogout,
+  onItemLike,
 }) {
   return (
     <div className="profile">
@@ -28,7 +29,11 @@ function Profile({
             + Add new
           </button>
         </div>
-        <ClothesSection onCardClick={onCardClick} garments={garments} />
+        <ClothesSection
+          onItemLike={onItemLike}
+          onCardClick={onCardClick}
+          garments={garments}
+        />
       </section>
     </div>
   );
