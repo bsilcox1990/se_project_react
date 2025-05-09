@@ -1,10 +1,8 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import "./Header.css";
 import logo from "../../assets/Logo.svg";
-//import avatar from "../../assets/avatar-placeholder.svg";
-import hoverAvatar from "../../assets/hover-avatar-placeholder.svg";
 import menuIcon from "../../assets/mobile-menu-button.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -27,6 +25,15 @@ function Header({
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
   const toggleMobileMenu = () => setIsMobileMenuOpened(!isMobileMenuOpened);
   const [value, setValue] = useState(false);
+
+  const [imageFailed, setImageFailed] = useState(false);
+  const getFirstLetter = (name) => {
+    return name ? name.charAt(0).toUpperCase() : "";
+  };
+
+  useEffect(() => {
+    setImageFailed(false);
+  }, [userData.avatar]);
 
   console.log("Current user context in header", userData);
 
@@ -64,16 +71,21 @@ function Header({
               <div className="header__user-info">
                 <p className="header__user-name">{userData.name}</p>
                 <div className="header__avatar-container">
-                  <img
-                    src={userData.avatar}
-                    alt="User profile picture"
-                    className="header__avatar header__avatar_default"
-                  />
-                  <img
-                    src={hoverAvatar}
-                    alt="the letter T"
-                    className="header__avatar header__avatar_hover"
-                  />
+                  {userData.avatar && !imageFailed ? (
+                    <img
+                      src={userData.avatar}
+                      alt="User profile picture"
+                      className="header__avatar header__avatar_default"
+                      onError={() => setImageFailed(true)}
+                    />
+                  ) : (
+                    <div className="header__avatar header__avatar_default header__avatar_letter">
+                      {getFirstLetter(userData.name)}
+                    </div>
+                  )}
+                  <div className="header__avatar header__avatar_hover header__avatar_letter">
+                    {getFirstLetter(userData.name)}
+                  </div>
                 </div>
               </div>
             </Link>

@@ -63,7 +63,8 @@
   height: 40px;
 }
 
-.header__avatar-container:hover .header__avatar_default {
+.header__avatar-container:hover
+  .header__avatar_default:not(.header__avatar_letter) {
   opacity: 0;
 }
 
@@ -82,6 +83,17 @@
   top: 0;
   left: 0;
   opacity: 0;
+}
+
+.header__avatar_letter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(206, 206, 206);
+  color: #fff;
+  border: 1px solid black;
+  font-weight: 700;
+  font-size: 20px;
 }
 
 .header__menu-button {

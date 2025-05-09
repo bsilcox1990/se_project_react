@@ -1,24 +1,37 @@
-import { useContext } from "react";
-import avatar from "../../assets/avatar-placeholder.svg";
-import hoverAvatar from "../../assets/hover-avatar-placeholder.svg";
+import { useContext, useEffect, useState } from "react";
 import "./SideBar.css";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function SideBar({ handleEditModal, handleLogout }) {
   const { userData } = useContext(CurrentUserContext);
+
+  const [imageFailed, setImageFailed] = useState(false);
+  const getFirstLetter = (name) => {
+    return name ? name.charAt(0).toUpperCase() : "";
+  };
+
+  useEffect(() => {
+    setImageFailed(false);
+  }, [userData.avatar]);
+
   return (
     <div className="sidebar">
       <div className="sidebar__avatar-container">
-        <img
-          src={userData.avatar}
-          alt="image of terrence tegegne"
-          className="sidebar__avatar sidebar__avatar_default"
-        />
-        <img
-          src={hoverAvatar}
-          alt="the letter T"
-          className="sidebar__avatar sidebar__avatar_hover"
-        />
+        {userData.avatar && !imageFailed ? (
+          <img
+            src={userData.avatar}
+            alt="image of terrence tegegne"
+            className="sidebar__avatar sidebar__avatar_default"
+            onError={() => setImageFailed(true)}
+          />
+        ) : (
+          <div className="sidebar__avatar sidebar__avatar_default sidebar__avatar_letter">
+            {getFirstLetter(userData.name)}
+          </div>
+        )}
+        <div className="sidebar__avatar sidebar__avatar_hover sidebar__avatar_letter">
+          {getFirstLetter(userData.name)}
+        </div>
         <p className="sidebar__user-name">{userData.name}</p>
       </div>
       <div className="sidebar__button-container">
