@@ -5,7 +5,7 @@ import activeLike from "../../assets/like-button-liked.svg";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function ItemCard({ item, onCardClick, onItemLike }) {
-  const { userData } = useContext(CurrentUserContext);
+  const { userData, isLoggedIn } = useContext(CurrentUserContext);
   const isLiked = item.likes.some((id) => id === userData._id);
   const handleCardClick = () => {
     onCardClick(item);
@@ -21,17 +21,19 @@ function ItemCard({ item, onCardClick, onItemLike }) {
       <div className="card__title-container">
         <h2 className="card__title">{item.name}</h2>
 
-        <button
-          onClick={handleLike}
-          type="button"
-          className="card__like-button"
-        >
-          <img
-            className="card__like-image"
-            src={isLiked ? activeLike : defaultLike}
-            alt="picture of a heart"
-          />
-        </button>
+        {isLoggedIn && (
+          <button
+            onClick={handleLike}
+            type="button"
+            className="card__like-button"
+          >
+            <img
+              className="card__like-image"
+              src={isLiked ? activeLike : defaultLike}
+              alt="picture of a heart"
+            />
+          </button>
+        )}
       </div>
       <img
         onClick={handleCardClick}
