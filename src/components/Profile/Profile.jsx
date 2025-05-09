@@ -2,11 +2,20 @@ import SideBar from "../SideBar/SideBar";
 import ClothesSection from "../ClothesSection/ClothesSection";
 import "./Profile.css";
 
-function Profile({ onCardClick, handleAddModal, garments }) {
+function Profile({
+  onCardClick,
+  handleAddModal,
+  garments,
+  handleEditModal,
+  handleLogout,
+}) {
   return (
     <div className="profile">
       <section className="profile__sidebar">
-        <SideBar />
+        <SideBar
+          handleEditModal={handleEditModal}
+          handleLogout={handleLogout}
+        />
       </section>
       <section className="profile__clothes">
         <div className="profile__heading">

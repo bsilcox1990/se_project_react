@@ -33,3 +33,34 @@ export function deleteItem(id, token) {
     },
   });
 }
+
+export function updateProfile(updatedInfo, token) {
+  return sendRequest({
+    url: `${baseUrl}/users/me`,
+    options: {
+      method: "PATCH",
+      headers: { ...headers, authorization: `Bearer ${token}` },
+      body: JSON.stringify(updatedInfo),
+    },
+  });
+}
+
+export function addItemLike(id, token) {
+  return sendRequest({
+    url: `${baseUrl}/items/${id}/likes`,
+    options: {
+      method: "PUT",
+      headers: { ...headers, authorization: `Bearer ${token}` },
+    },
+  });
+}
+
+export function deleteItemLike(id, token) {
+  return sendRequest({
+    url: `${baseUrl}/items/${id}/likes`,
+    options: {
+      method: "DELETE",
+      headers: { ...headers, authorization: `Bearer ${token}` },
+    },
+  });
+}

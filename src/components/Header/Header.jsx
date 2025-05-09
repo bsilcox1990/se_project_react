@@ -20,7 +20,7 @@ function Header({
     day: "numeric",
   });
 
-  const currentUser = useContext(CurrentUserContext);
+  const { userData, isLoggedIn } = useContext(CurrentUserContext);
   const location = useLocation();
   const isProfileRoute = location.pathname.startsWith("/profile");
 
@@ -28,7 +28,7 @@ function Header({
   const toggleMobileMenu = () => setIsMobileMenuOpened(!isMobileMenuOpened);
   const [value, setValue] = useState(false);
 
-  console.log("Current user context in header", currentUser);
+  console.log("Current user context in header", userData);
 
   return (
     <header className={`header ${isProfileRoute ? "header_type_profile" : ""}`}>
@@ -51,7 +51,7 @@ function Header({
       >
         <ToggleSwitch isOn={value} handleToggle={() => setValue(!value)} />
 
-        {currentUser.isLoggedIn ? (
+        {isLoggedIn ? (
           <>
             <button
               type="button"
@@ -62,12 +62,10 @@ function Header({
             </button>
             <Link to="/profile">
               <div className="header__user-info">
-                <p className="header__user-name">
-                  {currentUser.user.data.name}
-                </p>
+                <p className="header__user-name">{userData.name}</p>
                 <div className="header__avatar-container">
                   <img
-                    src={currentUser.user.data.avatar}
+                    src={userData.avatar}
                     alt="User profile picture"
                     className="header__avatar header__avatar_default"
                   />

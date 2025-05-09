@@ -4,8 +4,8 @@ import Modal from "../Modal/Modal";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function ItemModal({ card, onClose, activeModal, name, onDeleteClick }) {
-  const currentUser = useContext(CurrentUserContext);
-  const isOwn = card.owner === currentUser.user?.data._id;
+  const { userData } = useContext(CurrentUserContext);
+  const isOwn = card.owner === userData._id;
 
   return (
     <Modal

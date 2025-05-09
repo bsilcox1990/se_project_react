@@ -4,6 +4,11 @@
   flex: 1;
 }
 
+.profile__sidebar {
+  margin-right: 116px;
+  width: 229px;
+}
+
 .profile__heading {
   display: flex;
   gap: 20px;

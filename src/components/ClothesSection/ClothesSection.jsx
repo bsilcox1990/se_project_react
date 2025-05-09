@@ -4,13 +4,15 @@ import "./ClothesSection.css";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function ClothesSection({ onCardClick, garments }) {
-  const currentUser = useContext(CurrentUserContext);
+  const { userData } = useContext(CurrentUserContext);
+  console.log("context of the user in clothes section", userData);
+  console.log("user data _id", userData._id);
   return (
     <div className="clothes">
       <ul className="cards__list">
         {garments
           .filter((item) => {
-            return item.owner === currentUser.user.data._id;
+            return item.owner === userData._id;
           })
           .map((item) => {
             return (

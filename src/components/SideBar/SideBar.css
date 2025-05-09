@@ -1,16 +1,17 @@
 .sidebar {
   display: flex;
-  align-items: center;
+  flex-direction: column;
 }
 
 .sidebar__avatar {
   width: 56px;
   height: 56px;
+  border-radius: 50%;
   transition: opacity 0.3s ease;
 }
 
 .sidebar__user-name {
-  margin: 0 116px 0 16px;
+  margin-left: 70px;
   font-size: 20px;
   font-weight: 700;
 }
@@ -42,6 +43,28 @@
   opacity: 0;
 }
 
+.sidebar__edit-profile-btn {
+  background: transparent;
+  width: 171px;
+  padding: 0;
+  border: none;
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 24px;
+  cursor: pointer;
+}
+
+.sidebar__logout-btn {
+  background: transparent;
+  width: 65px;
+  padding: 0;
+  border: none;
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 540px) {
   .sidebar {
     align-items: normal;
@@ -56,5 +79,13 @@
     border-top: 1px solid rgb(0, 0, 0, 0.3);
     border-bottom: 1px solid rgb(0, 0, 0, 0.3);
     padding: 20px 0;
+  }
+
+  .sidebar__edit-profile-btn {
+    opacity: 0.6;
+  }
+
+  .sidebar__logout-btn {
+    opacity: 0.6;
   }
 }
