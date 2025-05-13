@@ -181,6 +181,10 @@
 
 .modal__caption {
   margin: 0;
+  max-width: 15ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .modal__weather {

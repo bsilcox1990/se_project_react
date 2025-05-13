@@ -47,6 +47,11 @@
     padding-top: 0;
   }
 
+  .profile__sidebar {
+    width: 100%;
+    margin: 0;
+  }
+
   .profile__heading {
     justify-content: center;
   }

@@ -1,17 +1,25 @@
 .sidebar {
   display: flex;
   flex-direction: column;
+  gap: 24px;
+}
+
+.sidebar__header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .sidebar__avatar {
   width: 56px;
   height: 56px;
   border-radius: 50%;
+  object-fit: cover;
   transition: opacity 0.3s ease;
 }
 
 .sidebar__user-name {
-  margin-left: 70px;
+  margin: 0;
   font-size: 20px;
   font-weight: 700;
 }
@@ -55,6 +63,12 @@
   font-size: 30px;
 }
 
+.sidebar__button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .sidebar__edit-profile-btn {
   background: transparent;
   width: 171px;
@@ -62,7 +76,6 @@
   border: none;
   font-size: 20px;
   font-weight: 700;
-  margin-top: 24px;
   cursor: pointer;
 }
 
@@ -73,24 +86,27 @@
   border: none;
   font-size: 20px;
   font-weight: 700;
-  margin-top: 8px;
   cursor: pointer;
 }
 
 @media screen and (max-width: 540px) {
   .sidebar {
-    align-items: normal;
-  }
-
-  .sidebar__user-name {
-    margin: 0 0 0 20px;
-    font-size: 24px;
-  }
-
-  .sidebar {
     border-top: 1px solid rgb(0, 0, 0, 0.3);
     border-bottom: 1px solid rgb(0, 0, 0, 0.3);
     padding: 20px 0;
+  }
+
+  .sidebar__header {
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .sidebar__user-name {
+    font-size: 24px;
+  }
+
+  .sidebar__button-container {
+    margin-left: 76px;
   }
 
   .sidebar__edit-profile-btn {

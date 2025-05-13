@@ -16,21 +16,23 @@ function SideBar({ handleEditModal, handleLogout }) {
 
   return (
     <div className="sidebar">
-      <div className="sidebar__avatar-container">
-        {userData.avatar && !imageFailed ? (
-          <img
-            src={userData.avatar}
-            alt="image of terrence tegegne"
-            className="sidebar__avatar sidebar__avatar_default"
-            onError={() => setImageFailed(true)}
-          />
-        ) : (
-          <div className="sidebar__avatar sidebar__avatar_default sidebar__avatar_letter">
+      <div className="sidebar__header">
+        <div className="sidebar__avatar-container">
+          {userData.avatar && !imageFailed ? (
+            <img
+              src={userData.avatar}
+              alt="image of terrence tegegne"
+              className="sidebar__avatar sidebar__avatar_default"
+              onError={() => setImageFailed(true)}
+            />
+          ) : (
+            <div className="sidebar__avatar sidebar__avatar_default sidebar__avatar_letter">
+              {getFirstLetter(userData.name)}
+            </div>
+          )}
+          <div className="sidebar__avatar sidebar__avatar_hover sidebar__avatar_letter">
             {getFirstLetter(userData.name)}
           </div>
-        )}
-        <div className="sidebar__avatar sidebar__avatar_hover sidebar__avatar_letter">
-          {getFirstLetter(userData.name)}
         </div>
         <p className="sidebar__user-name">{userData.name}</p>
       </div>
