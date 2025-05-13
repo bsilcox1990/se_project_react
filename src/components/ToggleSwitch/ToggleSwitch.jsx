@@ -1,12 +1,17 @@
 import { useContext } from "react";
+import { useLocation } from "react-router-dom";
 import "./ToggleSwitch.css";
 import { CurrentTempUnitContext } from "../../contexts/CurrentTempUnitContext";
 
 function ToggleSwitch({ isOn, handleToggle }) {
   const { handleToggleSwitchChange } = useContext(CurrentTempUnitContext);
-
+  const location = useLocation();
+  const isProfileRoute = location.pathname.startsWith("/profile");
   return (
-    <>
+    <div
+      style={{ display: "flex" }}
+      className={`${isProfileRoute ? "toggle-switch_hidden" : ""}`}
+    >
       <input
         checked={isOn}
         onChange={() => {
@@ -22,7 +27,7 @@ function ToggleSwitch({ isOn, handleToggle }) {
         <span className="toggle-switch__celcius">C</span>
         <span className="toggle-switch__button"></span>
       </label>
-    </>
+    </div>
   );
 }
 

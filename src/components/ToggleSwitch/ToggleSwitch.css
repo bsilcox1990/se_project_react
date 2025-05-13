@@ -17,6 +17,10 @@
   font-size: 14px;
 }
 
+.toggle-switch_hidden {
+  display: none !important;
+}
+
 .toggle-switch__fahrenheit {
   z-index: 1;
   color: #fff;

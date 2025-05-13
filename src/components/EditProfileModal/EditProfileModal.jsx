@@ -1,16 +1,50 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function EditProfileModal({
-  activeModal,
-  onClose,
-  isSubmitting,
-  onEditProfile,
-}) {
+function EditProfileModal({ activeModal, onClose, onEditProfile, buttonText }) {
+  const isOpen = activeModal === "edit-profile";
+  const { userData } = useContext(CurrentUserContext);
   const [submitError, setSubmitError] = useState(null);
-  const { values, errors, isValid, handleChange, resetForm } =
+  const [hasEdited, setHasEdited] = useState(false);
+  const [initialUserData, setInitialUserData] = useState(null);
+  const { values, errors, isValid, handleChange, resetForm, setValues } =
     useFormAndValidation();
+
+  useEffect(() => {
+    if (userData) {
+      const userValues = {
+        name: userData.name,
+        avatar: userData.avatar,
+      };
+      setInitialUserData(userValues);
+      if (userData && !hasEdited) {
+        setInitialUserData(userValues);
+      }
+    }
+  }, [userData, isOpen, setValues, hasEdited]);
+
+  useEffect(() => {
+    if (!initialUserData || !isOpen) return;
+
+    if (
+      values.name === initialUserData.name &&
+      values.avatar === initialUserData.avatar
+    ) {
+      setHasEdited(false);
+    } else {
+      const nameChanged = values.name !== initialUserData.name;
+      const avatarChanged = values.avatar !== initialUserData.avatar;
+      setHasEdited(nameChanged || avatarChanged);
+    }
+  }, [values, initialUserData, isOpen]);
+
+  useEffect(() => {
+    if (isOpen && userData && !hasEdited) {
+      setValues({ name: userData.name || "", avatar: userData.avatar || "" });
+    }
+  }, [isOpen, userData, setValues, hasEdited]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,6 +57,7 @@ function EditProfileModal({
       onEditProfile(updatedInfo)
         .then(() => {
           resetForm({ name: "", avatar: "" }, {}, false);
+          setHasEdited(false);
         })
         .catch((err) => {
           setSubmitError("Failed to update profile.  Please try again.");
@@ -30,6 +65,7 @@ function EditProfileModal({
         });
     }
   };
+
   return (
     <ModalWithForm
       activeModal={activeModal}
@@ -37,8 +73,6 @@ function EditProfileModal({
       name={"edit-profile"}
       onClose={onClose}
       onSubmit={handleSubmit}
-      buttonText={isSubmitting ? "Saving..." : "Save changes"}
-      isSubmitDisabled={!isValid}
     >
       <label htmlFor="name" className="modal__label">
         Name*
@@ -73,6 +107,13 @@ function EditProfileModal({
       {submitError && (
         <span className="modal__submit-error">{submitError}</span>
       )}
+      <button
+        type="submit"
+        className="modal__submit-button modal__submit-button_type_edit-profile"
+        disabled={!isValid}
+      >
+        {buttonText}
+      </button>
     </ModalWithForm>
   );
 }

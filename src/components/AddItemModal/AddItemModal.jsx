@@ -7,7 +7,7 @@ function AddItemModal({
   activeModal,
   onClose,
   onAddGarmentSubmit,
-  isSubmitting,
+  buttonText,
 }) {
   const [submitError, setSubmitError] = useState(null);
   const { values, handleChange, errors, isValid, resetForm } =
@@ -38,9 +38,7 @@ function AddItemModal({
       activeModal={activeModal}
       onClose={onClose}
       title="New garment"
-      buttonText={isSubmitting ? "Adding..." : "Add garment"}
       name="add-garment"
-      isSubmitDisabled={!isValid}
       onSubmit={handleSubmit}
     >
       <label htmlFor="name" className="modal__label">
@@ -126,6 +124,13 @@ function AddItemModal({
       {submitError && (
         <span className="modal__submit-error">{submitError}</span>
       )}
+      <button
+        type="submit"
+        className="modal__submit-button"
+        disabled={!isValid}
+      >
+        {buttonText}
+      </button>
     </ModalWithForm>
   );
 }

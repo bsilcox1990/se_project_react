@@ -251,7 +251,35 @@
 
 /* Register Modal */
 
+.modal__submit-button_type_register {
+  width: 86px;
+}
+
+.modal__switch-login-button {
+  background: transparent;
+  opacity: 0.6;
+  border: none;
+  cursor: pointer;
+}
+
 /* Login Modal */
+
+.modal__submit-button_type_login {
+  width: 76px;
+}
+
+.modal__switch-signup-button {
+  background: transparent;
+  opacity: 0.6;
+  border: none;
+  cursor: pointer;
+}
+
+/* Edit Modal */
+
+.modal__submit-button_type_edit-profile {
+  width: 128px;
+}
 
 @media screen and (max-width: 540px) {
   .modal__container_type_delete {

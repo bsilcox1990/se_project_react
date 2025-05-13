@@ -2,7 +2,13 @@ import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
-function LoginModal({ activeModal, onClose, isSubmitting, onLogin }) {
+function LoginModal({
+  activeModal,
+  onClose,
+  isSubmitting,
+  onLogin,
+  handleRegisterModal,
+}) {
   const [submitError, setSubmitError] = useState(null);
   const { values, errors, isValid, handleChange, resetForm } =
     useFormAndValidation();
@@ -68,6 +74,20 @@ function LoginModal({ activeModal, onClose, isSubmitting, onLogin }) {
       {submitError && (
         <span className="modal__submit-error">{submitError}</span>
       )}
+      <button
+        type="submit"
+        className="modal__submit-button modal__submit-button_type_login"
+        disabled={!isValid}
+      >
+        Log in
+      </button>
+      <button
+        type="button"
+        className="modal__switch-signup-button"
+        onClick={handleRegisterModal}
+      >
+        or Sign up
+      </button>
     </ModalWithForm>
   );
 }

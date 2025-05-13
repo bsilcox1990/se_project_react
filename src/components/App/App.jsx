@@ -280,18 +280,21 @@ function App() {
             isSubmitting={isLoading}
             onClose={closeModal}
             onAddGarmentSubmit={handleAddGarmentSubmit}
+            buttonText={isLoading ? "Adding..." : "Add garment"}
           />
           <RegisterModal
             activeModal={activeModal}
             isSubmitting={isLoading}
             onClose={closeModal}
             onRegister={handleRegisterUser}
+            handleLoginModal={handleLoginModal}
           />
           <LoginModal
             activeModal={activeModal}
             isSubmitting={isLoading}
             onClose={closeModal}
             onLogin={handleLogin}
+            handleRegisterModal={handleRegisterModal}
           />
           <ItemModal
             activeModal={activeModal}
@@ -312,6 +315,7 @@ function App() {
             onClose={closeModal}
             isSubmitting={isLoading}
             onEditProfile={handleEditProfile}
+            buttonText={isLoading ? "Saving..." : "Save changes"}
           />
         </CurrentTempUnitContext.Provider>
       </div>
