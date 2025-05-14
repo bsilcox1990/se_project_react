@@ -21,7 +21,7 @@ function SideBar({ handleEditModal, handleLogout }) {
           {userData.avatar && !imageFailed ? (
             <img
               src={userData.avatar}
-              alt="image of terrence tegegne"
+              alt="User profile picture"
               className="sidebar__avatar sidebar__avatar_default"
               onError={() => setImageFailed(true)}
             />

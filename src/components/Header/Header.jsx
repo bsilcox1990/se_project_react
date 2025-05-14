@@ -21,6 +21,7 @@ function Header({
   const { userData, isLoggedIn } = useContext(CurrentUserContext);
   const location = useLocation();
   const isProfileRoute = location.pathname.startsWith("/profile");
+  const isHomeRoute = location.pathname === "/";
 
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
   const toggleMobileMenu = () => setIsMobileMenuOpened(!isMobileMenuOpened);
@@ -54,7 +55,7 @@ function Header({
       <div
         className={`header__user-container ${
           isMobileMenuOpened ? `header__user-container_open` : ""
-        }`}
+        } ${isHomeRoute ? "header__user-container_type_home" : ""}`}
       >
         <ToggleSwitch isOn={value} handleToggle={() => setValue(!value)} />
 
@@ -69,7 +70,9 @@ function Header({
             </button>
             <Link to="/profile">
               <div className="header__user-info">
-                <p className="header__user-name">{userData.name}</p>
+                <p className="header__user-name" title={userData.name}>
+                  {userData.name}
+                </p>
                 <div className="header__avatar-container">
                   {userData.avatar && !imageFailed ? (
                     <img

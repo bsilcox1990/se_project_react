@@ -17,7 +17,9 @@ function ItemModal({ card, onClose, activeModal, name, onDeleteClick }) {
     >
       <img src={card.imageUrl} alt={card.name} className="modal__image" />
       <div className="modal__footer">
-        <h2 className="modal__caption">{card.name}</h2>
+        <h2 className="modal__caption" title={card.name}>
+          {card.name}
+        </h2>
         <p className="modal__weather">Weather: {card.weather}</p>
 
         {isOwn && (

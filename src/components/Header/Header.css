@@ -35,8 +35,11 @@
 }
 
 .header__user-name {
-  margin: 0 68px 0 0;
+  margin: 0;
   color: #000;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .header a {
@@ -168,6 +171,10 @@
     gap: 0;
   }
 
+  .header__user-container_type_home {
+    height: 220px;
+  }
+
   .header__user-name {
     margin: 0;
   }
@@ -205,5 +212,9 @@
 
   .header__user-container {
     height: 240px;
+  }
+
+  .header__user-container_type_home {
+    height: 220px;
   }
 }
