@@ -76,6 +76,9 @@ function App() {
         setGarments((prev) => [data.data, ...prev]);
         closeModal();
       })
+      .catch((error) => {
+        console.error("Failed to add new garment:", error);
+      })
       .finally(() => {
         setIsLoading(false);
       });
@@ -97,6 +100,9 @@ function App() {
       .then((user) => {
         setUserData(user.data);
         closeModal();
+      })
+      .catch((error) => {
+        console.error("Failed to register new user:", error);
       })
       .finally(() => {
         setIsLoading(false);
@@ -120,6 +126,9 @@ function App() {
         setUserData(user.data);
         closeModal();
       })
+      .catch((error) => {
+        console.error("Failed to login user:", error);
+      })
       .finally(() => {
         setIsLoading(false);
       });
@@ -137,6 +146,9 @@ function App() {
       .then((user) => {
         setUserData(user.data);
         closeModal();
+      })
+      .catch((error) => {
+        console.error("Failed to update profile information:", error);
       })
       .finally(() => {
         setIsLoading(false);
@@ -201,7 +213,9 @@ function App() {
         closeModal();
         setSelectedCard({});
       })
-      .catch(console.error)
+      .catch((error) => {
+        console.error("Failed to delete garment:", error);
+      })
       .finally(() => {
         setIsLoading(false);
       });
@@ -213,7 +227,9 @@ function App() {
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
       })
-      .catch(console.error);
+      .catch((error) => {
+        console.error("Failed fetching weather data:", error);
+      });
   }, []);
 
   useEffect(() => {
@@ -221,7 +237,9 @@ function App() {
       .then(({ data }) => {
         setGarments(data);
       })
-      .catch(console.error);
+      .catch((error) => {
+        console.error("Failed fetching garments from server:", error);
+      });
   }, []);
 
   return (
