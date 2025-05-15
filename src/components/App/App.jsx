@@ -55,10 +55,6 @@ function App() {
   const handleEditModal = () => setActiveModal("edit-profile");
   const closeModal = () => setActiveModal("");
 
-  console.log("value of logged in", isLoggedIn);
-  console.log("value of garments", garments);
-  console.log("value of user data", userData);
-
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
@@ -99,7 +95,6 @@ function App() {
         }
       })
       .then((user) => {
-        console.log("Register user data:", user);
         setUserData(user.data);
         closeModal();
       })
@@ -122,7 +117,6 @@ function App() {
         }
       })
       .then((user) => {
-        console.log("Login user data:", user);
         setUserData(user.data);
         closeModal();
       })
@@ -141,7 +135,6 @@ function App() {
         }
       })
       .then((user) => {
-        console.log("Edit profile user data:", user);
         setUserData(user.data);
         closeModal();
       })
@@ -188,7 +181,6 @@ function App() {
     }
     getUserInfo(jwt)
       .then((user) => {
-        console.log("Token check user data:", user);
         setIsLoggedIn(true);
         setUserData(user.data);
       })

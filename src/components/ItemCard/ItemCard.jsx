@@ -12,7 +12,6 @@ function ItemCard({ item, onCardClick, onItemLike }) {
   };
 
   const handleLike = () => {
-    console.log("value of item being passed to like", item);
     onItemLike(item, isLiked);
   };
 

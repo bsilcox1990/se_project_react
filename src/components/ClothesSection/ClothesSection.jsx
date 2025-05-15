@@ -6,8 +6,6 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 function ClothesSection({ onCardClick, garments, onItemLike }) {
   const { userData } = useContext(CurrentUserContext);
 
-  console.log("context of the user in clothes section", userData);
-  console.log("user data _id", userData._id);
   return (
     <div className="clothes">
       <ul className="cards__list">

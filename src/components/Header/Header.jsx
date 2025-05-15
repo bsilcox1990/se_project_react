@@ -36,8 +36,6 @@ function Header({
     setImageFailed(false);
   }, [userData.avatar]);
 
-  console.log("Current user context in header", userData);
-
   return (
     <header className={`header ${isProfileRoute ? "header_type_profile" : ""}`}>
       <div
