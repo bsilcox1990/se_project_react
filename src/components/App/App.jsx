@@ -55,6 +55,8 @@ function App() {
   const handleEditModal = () => setActiveModal("edit-profile");
   const closeModal = () => setActiveModal("");
 
+  console.log("Value of garments array", garments);
+
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
@@ -73,7 +75,9 @@ function App() {
     const jwt = getToken();
     return addItems(newGarment, jwt)
       .then((data) => {
+        debugger;
         setGarments((prev) => [data.data, ...prev]);
+        debugger;
         closeModal();
       })
       .catch((error) => {
@@ -235,7 +239,10 @@ function App() {
   useEffect(() => {
     getItems()
       .then(({ data }) => {
-        setGarments(data);
+        const sortedData = data.sort((a, b) => {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+        setGarments(sortedData);
       })
       .catch((error) => {
         console.error("Failed fetching garments from server:", error);
