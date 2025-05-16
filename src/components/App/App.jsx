@@ -73,9 +73,7 @@ function App() {
     const jwt = getToken();
     return addItems(newGarment, jwt)
       .then((data) => {
-        debugger;
         setGarments((prev) => [data.data, ...prev]);
-        debugger;
         closeModal();
       })
       .catch((error) => {
