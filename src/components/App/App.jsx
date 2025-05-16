@@ -55,8 +55,6 @@ function App() {
   const handleEditModal = () => setActiveModal("edit-profile");
   const closeModal = () => setActiveModal("");
 
-  console.log("Value of garments array", garments);
-
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
