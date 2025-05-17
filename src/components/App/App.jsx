@@ -27,6 +27,7 @@ import { signUp, signIn, getUserInfo } from "../../utils/auth";
 import { setToken, getToken, removeToken } from "../../utils/token";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -48,6 +49,7 @@ function App() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
 
   const handleAddModal = () => setActiveModal("add-garment");
   const handleRegisterModal = () => setActiveModal("register-user");
@@ -78,6 +80,7 @@ function App() {
       })
       .catch((error) => {
         console.error("Failed to add new garment:", error);
+        throw error;
       })
       .finally(() => {
         setIsLoading(false);
@@ -103,6 +106,7 @@ function App() {
       })
       .catch((error) => {
         console.error("Failed to register new user:", error);
+        throw error;
       })
       .finally(() => {
         setIsLoading(false);
@@ -112,7 +116,8 @@ function App() {
   const handleLogin = (user) => {
     setIsLoading(true);
     if (!user.email || !user.password) {
-      return;
+      setIsLoading(false);
+      return Promise.reject(new Error("Email and password are required"));
     }
     return signIn(user.email, user.password)
       .then((data) => {
@@ -128,6 +133,7 @@ function App() {
       })
       .catch((error) => {
         console.error("Failed to login user:", error);
+        throw error;
       })
       .finally(() => {
         setIsLoading(false);
@@ -149,6 +155,7 @@ function App() {
       })
       .catch((error) => {
         console.error("Failed to update profile information:", error);
+        throw error;
       })
       .finally(() => {
         setIsLoading(false);
@@ -189,6 +196,7 @@ function App() {
     const jwt = getToken();
 
     if (!jwt) {
+      setIsAuthLoading(false);
       return;
     }
     getUserInfo(jwt)
@@ -198,6 +206,11 @@ function App() {
       })
       .catch((err) => {
         console.error("Error fetching user:", err);
+        removeToken();
+        setIsLoggedIn(false);
+      })
+      .finally(() => {
+        setIsAuthLoading(false);
       });
   }, []);
 
@@ -244,6 +257,10 @@ function App() {
         console.error("Failed fetching garments from server:", error);
       });
   }, []);
+
+  if (isAuthLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <CurrentUserContext.Provider value={{ userData, isLoggedIn }}>
