@@ -1,6 +1,6 @@
 {
   "name": "se_project_react",
-  "homepage": "https://bsilcox1990.github.io/se_project_react",
+  "homepage": "https://wtwr-tripleten.jumpingcrab.com",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,7 +10,7 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "npm run build && scp -r ./dist/* bradleysilcox80@wtwr-tripleten.jumpingcrab.com:/home/bradleysilcox80/frontend"
   },
   "dependencies": {
     "react": "^18.3.1",
